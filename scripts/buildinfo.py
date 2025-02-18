@@ -70,8 +70,6 @@ def main():
   build_hostname = option.build_hostname_file.read().strip()
   build_number = option.build_number_file.read().strip()
   build_version_tags = option.build_keys
-  if option.build_type == "debug":
-    build_version_tags = "debug," + build_version_tags
 
   raw_date = option.date_file.read().strip()
   date = subprocess.check_output(["date", "-d", f"@{raw_date}"], text=True).strip()
