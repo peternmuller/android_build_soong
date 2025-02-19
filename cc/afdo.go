@@ -90,9 +90,10 @@ func (afdo *afdo) flags(ctx ModuleContext, flags Flags) Flags {
 		flags.Local.CFlags = append([]string{"-funique-internal-linkage-names"}, flags.Local.CFlags...)
 		// Flags for Flow Sensitive AutoFDO
 		flags.Local.CFlags = append([]string{"-mllvm", "-enable-fs-discriminator=true"}, flags.Local.CFlags...)
+		flags.Local.LdFlags = append([]string{"-Wl,-mllvm,-enable-fs-discriminator=true"}, flags.Local.LdFlags...)
 		// TODO(b/266595187): Remove the following feature once it is enabled in LLVM by default.
-                // TODO b/308241674 15979038988619404813 - Build Failure for format.o | uncomment this line to fix the build
-		//flags.Local.CFlags = append([]string{"-mllvm", "-improved-fs-discriminator=true"}, flags.Local.CFlags...)
+		flags.Local.CFlags = append([]string{"-mllvm", "-improved-fs-discriminator=true"}, flags.Local.CFlags...)
+		flags.Local.LdFlags = append([]string{"-Wl,-mllvm,-improved-fs-discriminator=true"}, flags.Local.LdFlags...)
 	}
 	if fdoProfilePath := getFdoProfilePathFromDep(ctx); fdoProfilePath != "" {
 		// The flags are prepended to allow overriding.
