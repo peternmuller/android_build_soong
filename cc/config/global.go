@@ -201,6 +201,7 @@ var (
 		"-fuse-ld=lld",
 		"-Wl,--icf=safe",
 		"-Xclang -opaque-pointers",
+		"-O3",
 	}
 
 	deviceGlobalCppflags = []string{
